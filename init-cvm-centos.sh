@@ -7,6 +7,7 @@ usage() {
     echo "  -n, --nodejs      Install Node.js and npm, and globally install pm2 and yarn"
     echo "  -j, --java        Install Java (JDK 17.0.9)"
     echo "  -g, --go          Install Go (Golang 1.17.5)"
+    echo "  -v, --vim         Initialize Vim configuration"
     echo "  -h, --help        Show this help message"
     echo
     echo "Examples:"
@@ -52,11 +53,33 @@ install_java() {
 
     # Install JDK from RPM package
     sudo rpm -i jdk-17.0.9_linux-aarch64_bin.rpm
+    sudo yum install -y java-17-openjdk.x86_64 java-17-openjdk-devel.x86_64
 
     # Check Java version
     java -version
 
     echo "Java installation finished."
+}
+
+initialize_vim() {
+    echo "Initializing Vim configuration..."
+
+    # Create or edit Vim configuration file
+    vim_config_file="$HOME/.vimrc"
+
+    if [ -f "$vim_config_file" ]; then
+        # If the file already exists, append or update settings
+        echo "set encoding=utf-8" >> "$vim_config_file"
+        echo "set nu" >> "$vim_config_file"
+        echo "Vim configuration updated."
+    else
+        # If the file doesn't exist, create and add settings
+        echo "set encoding=utf-8" > "$vim_config_file"
+        echo "set nu" >> "$vim_config_file"
+        echo "Vim configuration created."
+    fi
+
+    echo "Vim initialization finished."
 }
 
 install_go() {
@@ -87,6 +110,9 @@ while [ "$#" -gt 0 ]; do
             ;;
         -g|--go)
             install_go
+            ;;
+        -v|--vim)
+            initialize_vim
             ;;
         -h|--help)
             usage
