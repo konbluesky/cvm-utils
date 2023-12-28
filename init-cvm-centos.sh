@@ -82,6 +82,12 @@ while [ "$#" -gt 0 ]; do
         -n|--nodejs)
             install_nodejs
             ;;
+        -j|--java)
+            install_java
+            ;;
+        -g|--go)
+            install_go
+            ;;
         -h|--help)
             usage
             ;;
