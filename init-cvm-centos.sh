@@ -127,6 +127,7 @@ while [ "$#" -gt 0 ]; do
         *)
             echo "Invalid option: $1"
             usage
+            break  # 跳出循环
             ;;
     esac
     shift
