@@ -55,20 +55,18 @@ install_java() {
     # Check if JDK RPM file already exists
     if [ ! -f "$JDK_RPM" ]; then
         # Download JDK RPM package
-        wget https://download.oracle.com/java/17/archive/$JDK_RPM
+        wget -O $JDK_RPM https://download.oracle.com/java/17/archive/$JDK_RPM
     else
         echo "JDK RPM file already exists. Skipping download."
     fi
 
     # Install JDK from RPM package
     sudo rpm -i $JDK_RPM
-    sudo yum install -y java-17-openjdk.x86_64 java-17-openjdk-devel.x86_64
-
     # Check Java version
     java -version
-
     echo "Java installation finished."
 }
+
 
 initialize_vim() {
     echo "Initializing Vim configuration..."
