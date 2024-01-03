@@ -127,12 +127,11 @@ while [ "$#" -gt 0 ]; do
         *)
             echo "Invalid option: $1"
             usage
-            break  # 跳出循环
+            exit 1  # 直接退出脚本，不再执行后续逻辑
             ;;
     esac
     shift
 done
 
-if [ "$#" -eq 0 ]; then
-    usage
-fi
+# 这里不再判断是否有参数，而是直接执行 usage 函数
+usage
