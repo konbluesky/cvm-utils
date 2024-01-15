@@ -22,7 +22,7 @@ usage() {
 
 install_tools() {
     echo "Installing basic tools..."
-    yum install -y vim tree curl git net-tools expect unzip lsof rsync jq
+    yum install -y vim tree curl git net-tools expect unzip lsof rsync jq htop
     echo "Basic tools installation finished."
 }
 
