@@ -8,17 +8,31 @@ usage() {
     echo "  -j, --java        Install Java (JDK 17.0.9)"
     echo "  -g, --go          Install Go (Golang 1.17.5)"
     echo "  -v, --vim         Initialize Vim configuration"
+    echo "  -p, --python      Initialize Python(3.9.6)"
     echo "  -h, --help        Show this help message"
     echo
     echo "Examples:"
     echo "  $0 -t              # Install basic tools"
     echo "  $0 -n              # Install Node.js and npm"
     echo "  $0 -j              # Install Java"
+    echo "  $0 -p              # Install Python"
     echo "  $0 -g              # Install Go"
     echo "  $0 -t -n           # Install basic tools and Node.js"
     exit 1
 }
 
+install_python(){
+  yum groupinstall "Development Tools";
+  yum install -y git gcc make openssl-devel bzip2-devel libffi-devel zlib-devel readline-devel sqlite-devel;
+  # sudo yum install gcc openssl-devel bzip2-devel libffi-devel zlib-devel
+  wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz;
+  tar -xvf Python-3.9.6.tgz;
+  cd Python-3.9.6;
+  ./configure --enable-optimizations;
+  sudo make;
+  sudo make altinstall;
+  python3.9 --version;
+}
 
 install_tools() {
     echo "Installing basic tools..."
@@ -120,6 +134,9 @@ while [ "$#" -gt 0 ]; do
             ;;
         -v|--vim)
             initialize_vim
+            ;;
+        -p|--python)
+            install_python
             ;;
         -h|--help)
             usage
