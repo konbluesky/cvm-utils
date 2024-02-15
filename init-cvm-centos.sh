@@ -9,6 +9,7 @@ usage() {
     echo "  -g, --go          Install Go (Golang 1.17.5)"
     echo "  -v, --vim         Initialize Vim configuration"
     echo "  -p, --python      Initialize Python(3.9.6)"
+    echo "  -d, --docker      Initialize Docker"
     echo "  -h, --help        Show this help message"
     echo
     echo "Examples:"
@@ -16,6 +17,7 @@ usage() {
     echo "  $0 -n              # Install Node.js and npm"
     echo "  $0 -j              # Install Java"
     echo "  $0 -p              # Install Python"
+    echo "  $0 -d              # Install Docker"
     echo "  $0 -g              # Install Go"
     echo "  $0 -t -n           # Install basic tools and Node.js"
     exit 1
@@ -103,6 +105,12 @@ initialize_vim() {
     echo "Vim initialization finished."
 }
 
+install_docker(){
+  sudo yum install -y yum-utils
+  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+}
+
 install_go() {
     echo "Installing Go..."
     wget https://golang.org/dl/go1.17.5.linux-amd64.tar.gz
@@ -137,6 +145,9 @@ while [ "$#" -gt 0 ]; do
             ;;
         -p|--python)
             install_python
+            ;;
+        -d|--docker)
+            install_docker
             ;;
         -h|--help)
             usage
