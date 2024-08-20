@@ -44,6 +44,8 @@ install_tools() {
 
 install_nodejs() {
     echo "Installing Node.js and npm..."
+#    curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+#    https://github.com/nodesource/distributions
     sudo yum install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
     sudo yum install nodejs -y --setopt=nodesource-nodejs.module_hotfixes=1
     npm install -g pm2
@@ -94,6 +96,8 @@ initialize_vim() {
         # If the file already exists, append or update settings
         echo "set encoding=utf-8" >> "$vim_config_file"
         echo "set nu" >> "$vim_config_file"
+        echo "set noautoread" >> "$vim_config_file"
+
         echo "Vim configuration updated."
     else
         # If the file doesn't exist, create and add settings

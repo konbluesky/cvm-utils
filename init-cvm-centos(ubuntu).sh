@@ -44,6 +44,7 @@ install_tools() {
 
 install_nodejs() {
     echo "Installing Node.js and npm..."
+    echo "Installing Node.js https://github.com/nodesource/distributions"
     sudo apt-get update
     sudo apt-get install -y nodejs npm
     sudo npm install -g pm2 yarn
@@ -63,7 +64,9 @@ add_to_profile() {
 
 install_java() {
     echo "Installing OpenJDK 17..."
-    sudo apt-get install -y openjdk-17-jdk
+#    sudo apt-get install -y openjdk-17-jdk
+    wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
+    sudo dpkg -i jdk-17_linux-x64_bin.deb
     java -version
     echo "Java installation finished."
 }
